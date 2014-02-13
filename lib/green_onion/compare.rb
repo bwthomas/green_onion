@@ -19,7 +19,7 @@ module GreenOnion
       begin
         diff_iterator
       rescue ChunkyPNG::OutOfBounds
-        warn "Skins are different sizes. Please delete #{org} and/or #{fresh}.".color(:yellow)
+        warn Rainbow("Skins are different sizes. Please delete #{org} and/or #{fresh}.").color(:yellow)
       end
     end
 
@@ -71,7 +71,7 @@ module GreenOnion
       begin
         @images.last.rect(x.min, y.min, x.max, y.max, ChunkyPNG::Color.rgb(0,255,0))
       rescue NoMethodError
-        puts "Both skins are the same.".color(:yellow)
+        puts Rainbow("Both skins are the same.").color(:yellow)
       end
       
       @images.last.save(@diffed_image)

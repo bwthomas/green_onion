@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'open3'
 
 describe "bin/green_onion" do
 
