@@ -55,7 +55,7 @@ module GreenOnion
 
     def skin_picker(url, type, threshold=100)
       if(@screenshot.paths_hash.length > 1)
-        puts "\n" + url.color(:cyan)
+        puts "\n" + Rainbow(url).color(:cyan)
         if type[:percentage]
           @compare.percentage_diff(@screenshot.paths_hash[:original], @screenshot.paths_hash[:fresh])
           threshold_alert(@compare.percentage_changed, threshold)
@@ -64,14 +64,14 @@ module GreenOnion
           @compare.visual_diff(@screenshot.paths_hash[:original], @screenshot.paths_hash[:fresh])
         end
       else
-        puts "\n#{url}".color(:cyan) + " has been saved to #{@screenshot.paths_hash[:original]}".color(:yellow)
+        puts Rainbow("\n#{url}").color(:cyan) + Rainbow(" has been saved to #{@screenshot.paths_hash[:original]}").color(:yellow)
       end
     end
 
     # This is used in skin_percentage to raise error if a set of skins are ok or not
     def threshold_alert(actual, threshold)
       if actual > threshold
-        abort "#{actual - threshold}% above threshold set @ #{threshold}%".color(:red) + 
+        abort Rainbow("#{actual - threshold}% above threshold set @ #{threshold}%").color(:red) + 
         "\npixels changed (%):     #{@compare.percentage_changed}%" +
         "\npixels changed/total:  #{@compare.changed_px}/#{@compare.total_px}"
       else
